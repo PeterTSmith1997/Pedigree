@@ -126,6 +126,19 @@ public class Compare {
 				// TODO Auto-generated catch block
 				System.err.println(e.getMessage());
 			}
+			
+		}
+		else {
+			File Mfile = new File(file);
+			try {
+				Mfile.createNewFile();
+			//wait(20);
+				openFile(file);
+				return;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	
