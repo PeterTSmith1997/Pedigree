@@ -46,17 +46,23 @@ public class Compare {
 			String fname = scanA.next();
 			String lname = scanA.next();
 			int year = scanA.nextInt();
-            Person p = new Person(fname, lname, year);
+			String brithCity = scanA.next();
+			String brithCount = scanA.next();
+			String brithcuntory = scanA.next();
+            Person p = new Person(fname, lname, year, brithCity, brithCount, brithcuntory);
             A.add(p);
             
 		}
 
 		while (scanB.hasNextLine()) {
-			String Bfname = scanB.next();
-			String Blname = scanB.next();
+			String fname = scanB.next();
+			String lname = scanB.next();
 			int year = scanB.nextInt();
-            Person q = new Person(Bfname, Blname, year);
-            B.add(q);
+			String brithCity = scanB.next();
+			String brithCount = scanB.next();
+			String brithcuntory = scanB.next();
+            Person p = new Person(fname, lname, year, brithCity, brithCount, brithcuntory);
+            A.add(p);
 		}
 		scanA.close();
 		scanB.close();
