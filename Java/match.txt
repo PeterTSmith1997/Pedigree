@@ -1,0 +1,2 @@
+Person [Fname=mike, Lname=main, brithYear=2000, brithCity=Ne, brithCount=Tyne-and-wear, brithcuntory=uk, deathCity=Newcastle, deathCount=Tyne-and-wear, deathcuntory=uk, deathYear=20]
+Total = 1

@@ -1,3 +1,4 @@
+import java.awt.Desktop;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -19,27 +20,29 @@ public class Compare {
 	//stuff
 	private static Scanner scanA;
 	private static Scanner scanB;
-//	public static WindowMain app = new WindowMain();
+    public static Window app;
 	private BufferedWriter out;
 	public static void main(String[] args) {
-	//	app.setVisible(true);
+		app = new Window();
+		app.setVisible(true);
 		try {
 			scanA = new Scanner(fileA);
 			scanB = new Scanner(fileB);
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
-		Compare c = new Compare();
-		c.readFiles();
+		//Compare c = new Compare();
+		//c.readFiles();
 
 		for (Person personA : A) {
 			System.err.println(personA.toString());
 		}
+		System.err.println("end A");
 		for (Person personB : B) {
 			System.err.println(personB.toString());
 		}
-		c.loop();
-		c.write();
+//		c.loop();
+//		c.write();
 	}
 	public void readFiles() {
 		while (scanA.hasNextLine()) {
@@ -49,7 +52,12 @@ public class Compare {
 			String brithCity = scanA.next();
 			String brithCount = scanA.next();
 			String brithcuntory = scanA.next();
-            Person p = new Person(fname, lname, year, brithCity, brithCount, brithcuntory);
+			String deathCity = scanA.next();
+			String deathCount = scanA.next();
+			String deathcuntory = scanA.next();
+			int deathyear = scanA.nextInt();
+            Person p = new Person(fname, lname, year, brithCity, brithCount, brithcuntory, deathCity, deathCount,
+            		deathcuntory, deathyear);
             A.add(p);
             
 		}
@@ -61,9 +69,14 @@ public class Compare {
 			String brithCity = scanB.next();
 			String brithCount = scanB.next();
 			String brithcuntory = scanB.next();
-            Person p = new Person(fname, lname, year, brithCity, brithCount, brithcuntory);
-            A.add(p);
-		}
+			String deathCity = scanB.next();
+			String deathCount = scanB.next();
+			String deathcuntory = scanB.next();
+			int deathYear = scanB.nextInt();
+            Person p = new Person(fname, lname, year, brithCity, brithCount, brithcuntory, deathCity, deathCount,
+            		deathcuntory, deathYear);
+            B.add(p);
+            	}
 		scanA.close();
 		scanB.close();
 	}
@@ -81,9 +94,14 @@ public class Compare {
 	public void write() {
 		try {
 			out = new BufferedWriter(new FileWriter("match.txt"));
-			for (int i = 0; i < matches.size() ; i++) {
-				out.write(matches.get(i).toString() + "\n");
-				System.err.println(matches.get(i).toString());
+			if (!matches.isEmpty()) {
+				for (int i = 0; i < matches.size() ; i++) {
+					out.write(matches.get(i).toString() + "\n");
+					System.err.println(matches.get(i).toString());
+					out.write("Total = " + matches.size());
+				}
+			}else {
+				out.write("No matches");
 			}
 			out.close();
 		} catch (IOException e) {
@@ -93,6 +111,22 @@ public class Compare {
 	
 	
 		
+	}
+	
+	public void openFile(String file) {
+		if (!Desktop.isDesktopSupported()) {
+			System.err.println("not supported");
+			return;
+		}
+		File open = new File(file);
+		if (open.exists()) {
+			try {
+				Desktop.getDesktop().open(open);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				System.err.println(e.getMessage());
+			}
+		}
 	}
 	
 }
