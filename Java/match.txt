@@ -1,2 +1,5 @@
-Person [Fname=mike, Lname=main, brithYear=2000, brithCity=Ne, brithCount=Tyne-and-wear, brithcuntory=uk, deathCity=Newcastle, deathCount=Tyne-and-wear, deathcuntory=uk, deathYear=20]
-Total = 1
+Person [Fname=Dave, Lname=Smith, brithYear=3, brithCity=Newcastle, brithCount=Tyne-and-wear, brithcuntory=uk, deathCity=Newcastle, deathCount=Tyne-and-wear, deathcuntory=uk, deathYear=21]
+Total = 4Person [Fname=mike, Lname=main, brithYear=2000, brithCity=Ne, brithCount=Tyne-and-wear, brithcuntory=uk, deathCity=Newcastle, deathCount=Tyne-and-wear, deathcuntory=uk, deathYear=20]
+Total = 4Person [Fname=Bob, Lname=Godd, brithYear=30, brithCity=Newcastle, brithCount=Tyne-and-wear, brithcuntory=uk, deathCity=Newcastle, deathCount=Tyne-and-wear, deathcuntory=uk, deathYear=2008]
+Total = 4Person [Fname=ken, Lname=dod, brithYear=200, brithCity=Newcastle, brithCount=Tyne-and-wear, brithcuntory=uk, deathCity=Newcastle, deathCount=Tyne-and-wear, deathcuntory=uk, deathYear=20]
+Total = 4

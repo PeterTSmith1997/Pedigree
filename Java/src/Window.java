@@ -31,18 +31,18 @@ public class Window extends JFrame {
 			}
 		});
 		
-		JButton btnNewButton = new JButton("View tree A");
+		JButton btnNewButton = new JButton("view "+c.getFa().substring(0, c.getFa().length()-4));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				c.openFile("a.txt");
+				c.openFile(c.getFa());
 			}
 		});
 		panel.add(btnNewButton);
-		
-		JButton btnViewTreeB = new JButton("View tree B");
+	
+		JButton btnViewTreeB = new JButton("view "+c.getFb().substring(0, c.getFb().length()-4));
 		btnViewTreeB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				c.openFile("b.txt");
+				c.openFile(c.getFb());
 			}
 		});
 		panel.add(btnViewTreeB);

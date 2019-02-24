@@ -15,14 +15,17 @@ public class Compare {
 	ArrayList<Person> nommatches = new ArrayList<Person>();
 	
 	//files
-	private static File fileA = new File("A.txt");
-	private static File fileB = new File("B.txt");
+	private static String fa = "tree1.txt";
+	private static String fb = "tree2.txt";
+	private static File fileA = new File(fa);
+	private static File fileB = new File(fb);
 	//stuff
 	private static Scanner scanA;
 	private static Scanner scanB;
     public static Window app;
 	private BufferedWriter out;
 	public static void main(String[] args) {
+		loadfiles();
 		app = new Window();
 		app.setVisible(true);
 		try {
@@ -43,6 +46,30 @@ public class Compare {
 		}
 //		c.loop();
 //		c.write();
+	}
+	/**
+	 * @return the fa
+	 */
+	public  String getFa() {
+		return fa;
+	}
+	/**
+	 * @return the fb
+	 */
+	public String getFb() {
+		return fb;
+	}
+	/**
+	 * @param fa the fa to set
+	 */
+	public  void setFa(String fa) {
+		Compare.fa = fa;
+	}
+	/**
+	 * @param fb the fb to set
+	 */
+	public void setFb(String fb) {
+		Compare.fb = fb;
 	}
 	public void readFiles() {
 		while (scanA.hasNextLine()) {
@@ -96,10 +123,12 @@ public class Compare {
 			out = new BufferedWriter(new FileWriter("match.txt"));
 			if (!matches.isEmpty()) {
 				for (int i = 0; i < matches.size() ; i++) {
-					out.write(matches.get(i).toString() + "\n");
+					out.write(matches.get(i).toString());
+					out.newLine();
 					System.err.println(matches.get(i).toString());
-					out.write("Total = " + matches.size());
+					
 				}
+				out.write("Total = " + matches.size());
 			}else {
 				out.write("No matches");
 			}
@@ -141,5 +170,33 @@ public class Compare {
 			}
 		}
 	}
+	private static void loadfiles() {
+		if (fileA.exists()) {
+			//do nowt
+		}
+		else {
+			File Mfilea = new File(fa);
+			try {
+				Mfilea.createNewFile();
+			//wait(20);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		if (fileB.exists()) {
+			//do nowt
+		}
+		else {
+			File Mfileb = new File(fb);
+			try {
+				Mfileb.createNewFile();
+			//wait(20);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	
+	}
 }
