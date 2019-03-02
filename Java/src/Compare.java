@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 public class Compare {
 	//data for tree a
-	static ArrayList<Person> A = new ArrayList<Person>();
+	public static  ArrayList<Person> A = new ArrayList<Person>();
 	 // data for tree b
 	static ArrayList<Person> B = new ArrayList<Person>();
 	
@@ -15,10 +15,11 @@ public class Compare {
 	ArrayList<Person> nommatches = new ArrayList<Person>();
 	
 	//files
-	private static String fa = "tree1.txt";
-	private static String fb = "tree2.txt";
+	private static String fa = "tree1.csv";
+	private static String fb = "tree2.csv";
 	private static File fileA = new File(fa);
 	private static File fileB = new File(fb);
+	private static String macthf = "maches.csv";
 	//stuff
 	private static Scanner scanA;
 	private static Scanner scanB;
@@ -28,18 +29,11 @@ public class Compare {
 		loadfiles();
 		app = new Window();
 		app.setVisible(true);
-		try {
-			scanA = new Scanner(fileA);
-			scanB = new Scanner(fileB);
-		} catch (Exception e) {
-			System.err.println(e.getMessage());
-		}
+		
 		//Compare c = new Compare();
 		//c.readFiles();
 
-		for (Person personA : A) {
-			System.err.println(personA.toString());
-		}
+		
 		System.err.println("end A");
 		for (Person personB : B) {
 			System.err.println(personB.toString());
@@ -60,6 +54,18 @@ public class Compare {
 		return fb;
 	}
 	/**
+	 * @return the macthf
+	 */
+	public static String getMacthf() {
+		return macthf;
+	}
+	/**
+	 * @param macthf the macthf to set
+	 */
+	public static void setMacthf(String macthf) {
+		Compare.macthf = macthf;
+	}
+	/**
 	 * @param fa the fa to set
 	 */
 	public  void setFa(String fa) {
@@ -72,55 +78,59 @@ public class Compare {
 		Compare.fb = fb;
 	}
 	public void readFiles() {
+		try {
+			scanA = new Scanner(fileA);
+			scanB = new Scanner(fileB);
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
 		while (scanA.hasNextLine()) {
-			String fname = scanA.next();
-			String lname = scanA.next();
-			int year = scanA.nextInt();
-			String brithCity = scanA.next();
-			String brithCount = scanA.next();
-			String brithcuntory = scanA.next();
-			String deathCity = scanA.next();
-			String deathCount = scanA.next();
-			String deathcuntory = scanA.next();
-			int deathyear = scanA.nextInt();
+			String line = scanA.nextLine();
+			String[] person = line.split(",");
+			String fname = person[0];
+			String lname = person[1];
+			Integer year = Integer.parseInt(person[2]);
+			String brithCity = person[3];
+			String brithCount = person[4];
+			String brithcuntory = person[5];
+			String deathCity = person[6];
+			String deathCount = person [7];
+			String deathcuntory = person[8];
+			int deathYear = Integer.parseInt(person[9]);
             Person p = new Person(fname, lname, year, brithCity, brithCount, brithcuntory, deathCity, deathCount,
-            		deathcuntory, deathyear);
+            		deathcuntory, deathYear);
             A.add(p);
             
 		}
 
 		while (scanB.hasNextLine()) {
-			String fname = scanB.next();
-			String lname = scanB.next();
-			int year = scanB.nextInt();
-			String brithCity = scanB.next();
-			String brithCount = scanB.next();
-			String brithcuntory = scanB.next();
-			String deathCity = scanB.next();
-			String deathCount = scanB.next();
-			String deathcuntory = scanB.next();
-			int deathYear = scanB.nextInt();
+			String line = scanA.nextLine();
+			String[] person = line.split(",");
+			String fname = person[0];
+			String lname = person[1];
+			Integer year = Integer.parseInt(person[2]);
+			String brithCity = person[3];
+			String brithCount = person[4];
+			String brithcuntory = person[5];
+			String deathCity = person[6];
+			String deathCount = person [7];
+			String deathcuntory = person[8];
+			int deathYear = Integer.parseInt(person[9]);
             Person p = new Person(fname, lname, year, brithCity, brithCount, brithcuntory, deathCity, deathCount,
             		deathcuntory, deathYear);
-            B.add(p);
-            	}
+            A.add(p);
+        	}
 		scanA.close();
 		scanB.close();
 	}
-	public void loop() {
-		for (Person personA : A) {
-			for (Person personB : B) {
-				if (personA.equals(personB)){
-						matches.add(personB);
-						System.err.println(matches.size());
-					}
-				}
-				
-			}
+	public void doComp() {
+		matches = A;
+		matches.retainAll(B);
+		
 		}
 	public void write() {
 		try {
-			out = new BufferedWriter(new FileWriter("match.txt"));
+			out = new BufferedWriter(new FileWriter(getMacthf()));
 			if (!matches.isEmpty()) {
 				for (int i = 0; i < matches.size() ; i++) {
 					out.write(matches.get(i).toString());
@@ -137,23 +147,22 @@ public class Compare {
 			// TODO Auto-generated catch block
 			System.err.println(e.getMessage());
 		}
-	
-	
+		matches.clear();
+		A.clear();
+		B.clear();
 		
 	}
 	
-	public void openFile(String file) {
+	public void openFile(String file) throws Exception, IOException {
 		if (!Desktop.isDesktopSupported()) {
-			System.err.println("not supported");
-			return;
+			throw new Exception(); 
 		}
 		File open = new File(file);
 		if (open.exists()) {
 			try {
 				Desktop.getDesktop().open(open);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				System.err.println(e.getMessage());
+			 throw new IOException();
 			}
 			
 		}
